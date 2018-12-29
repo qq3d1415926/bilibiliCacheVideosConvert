@@ -42,13 +42,30 @@ def createTargetDir(fatherDir):
     else:
         return myDir
 
+def typeFileCount(dirLi, suffix):
+    count = 0
+    for name in dirLi:
+        if os.path.splitext(name)[1] == suffix:
+            count += 1
+    return count
+
+def typeFileList(faDir, dirLi, suffix):
+    li = []
+    tempLi = []
+    for name in dirLi:
+        if os.path.splitext(name)[0].isdigit() and os.path.splitext(name)[1] == suffix:
+            tempLi.append(name)
+            tempLi.sort(key=lambda s : int(os.path.splitext(s)[0]))
+    for ele in tempLi:
+        li.append(faDir + "\\" + ele)
+    return li
+
 def everyDir(aDir):
     global targetDir
     entryFileUrl = None
     # mainDirUrl = None
     entryFile = None
     entryJsonObj = None
-    oldFile = None
     if os.path.isdir(aDir):
         gsDirs = os.listdir(aDir)
         gsDirs = [aDir + "\\" + s for s in gsDirs]
@@ -78,14 +95,41 @@ def everyDir(aDir):
         typeTagUrl = entryJsonObj['type_tag']
         pageName = entryJsonObj['page_data']['page']
         partName = entryJsonObj['page_data']['part']
+        oldFile = None
         newFile = itemDir + "\\" + str(pageName) + "-" + partName + ".flv"
-        for item in os.listdir(aDir + "\\" + typeTagUrl):
-            if item[-4:] == '.blv':
-                oldFile = aDir + "\\" + typeTagUrl + "\\" + item
-            else:
-                pass
-        if os.path.isfile(oldFile) and newFile not in os.listdir(itemDir):
-            print("正在转换{}……".format(pageName + "-" + partName))
+        mainFilesNames = os.listdir(aDir + "\\" + typeTagUrl)
+        numOfBlv = typeFileCount(mainFilesNames, '.blv')
+        mergeFile = None
+        if numOfBlv == 0:
+            print("文件不存在：{}".format(str(pageName)))
+        elif numOfBlv == 1:
+            oldFile = aDir + "\\" + typeTagUrl + "\\" + '0.blv'
+        elif numOfBlv > 1:
+            # resultBlv = aDir + "\\" + typeTagUrl + "\\" + "result.blv"
+            # blvList = typeFileList(aDir + "\\" + typeTagUrl, mainFilesNames, '.blv')
+            # if os.path.exists(resultBlv):
+            #     os.remove(resultBlv)
+            # try:
+            #     mergeFile = open(resultBlv, 'ab')
+            #     for ele in blvList:
+            #         source = None
+            #         try:
+            #             source = open(ele, 'rb+')
+            #             mergeFile.write(source.read())
+            #         except:
+            #             print("文件操作出错！")
+            #         finally:
+            #             source.close()
+            # except:
+            #     print("文件\"result.blv\"操作出错了！")
+            # finally:
+            #     mergeFile.close()
+            # oldFile = aDir + "\\" + typeTagUrl + "\\" + 'result.blv'
+            oldFile = aDir + "\\" + typeTagUrl + "\\" + '0.blv'
+            pass
+
+        if os.path.isfile(oldFile) and not os.path.exists(newFile):
+            print("正在转换: {}……".format(str(pageName) + "-" + partName))
             shutil.copyfile(oldFile, newFile)
         else:
             pass
