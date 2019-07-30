@@ -6,6 +6,7 @@ repeat = 0
 fatherDir = None
 targetDir = None
 
+
 def getSubDir():
     global repeat
     global fatherDir
@@ -18,6 +19,7 @@ def getSubDir():
             return None
         print("不是文件夹哦！请仔细一点.")
         getSubDir()
+
 
 def checkSubDirs(dirs):
     if len(dirs) == 0:
@@ -34,13 +36,15 @@ def checkSubDirs(dirs):
         else:
             return False
 
+
 def createTargetDir(fatherDir):
     myDir = input("输入你要存放的目录哟骚年: >> ")
-    if myDir == None or myDir == '' or not os.path.isdir(myDir):
+    if myDir is None or myDir == '' or not os.path.isdir(myDir):
         print("输入的是什么狗屁东东嘛！我只好用默认路径了……")
         return os.path.dirname(fatherDir)
     else:
         return myDir
+
 
 def typeFileCount(dirLi, suffix):
     count = 0
@@ -49,16 +53,18 @@ def typeFileCount(dirLi, suffix):
             count += 1
     return count
 
+
 def typeFileList(faDir, dirLi, suffix):
     li = []
     tempLi = []
     for name in dirLi:
         if os.path.splitext(name)[0].isdigit() and os.path.splitext(name)[1] == suffix:
             tempLi.append(name)
-            tempLi.sort(key=lambda s : int(os.path.splitext(s)[0]))
+            tempLi.sort(key=lambda s: int(os.path.splitext(s)[0]))
     for ele in tempLi:
         li.append(faDir + "\\" + ele)
     return li
+
 
 def everyDir(aDir):
     global targetDir
@@ -105,27 +111,31 @@ def everyDir(aDir):
         elif numOfBlv == 1:
             oldFile = aDir + "\\" + typeTagUrl + "\\" + '0.blv'
         elif numOfBlv > 1:
-            # resultBlv = aDir + "\\" + typeTagUrl + "\\" + "result.blv"
-            # blvList = typeFileList(aDir + "\\" + typeTagUrl, mainFilesNames, '.blv')
-            # if os.path.exists(resultBlv):
-            #     os.remove(resultBlv)
-            # try:
-            #     mergeFile = open(resultBlv, 'ab')
-            #     for ele in blvList:
-            #         source = None
-            #         try:
-            #             source = open(ele, 'rb+')
-            #             mergeFile.write(source.read())
-            #         except:
-            #             print("文件操作出错！")
-            #         finally:
-            #             source.close()
-            # except:
-            #     print("文件\"result.blv\"操作出错了！")
-            # finally:
-            #     mergeFile.close()
-            # oldFile = aDir + "\\" + typeTagUrl + "\\" + 'result.blv'
-            oldFile = aDir + "\\" + typeTagUrl + "\\" + '0.blv'
+            resultBlv = aDir + "\\" + typeTagUrl + "\\" + "result.blv"
+            blvList = typeFileList(aDir + "\\" + typeTagUrl, mainFilesNames, '.blv')
+            if os.path.exists(resultBlv):
+                os.remove(resultBlv)
+            try:
+                mergeFile = open(resultBlv, 'ab')
+                for ele in blvList:
+                    source = None
+                    try:
+                        source = open(ele, 'rb+')
+                        if blvList.index(ele) == 0:
+                            mergeFile.write(source.read())
+                        else:
+                            source.seek(13)
+                            mergeFile.write(source.read())
+                    except:
+                        print("文件操作出错！")
+                    finally:
+                        source.close()
+            except:
+                print("文件\"result.blv\"操作出错了！")
+            finally:
+                mergeFile.close()
+            oldFile = aDir + "\\" + typeTagUrl + "\\" + 'result.blv'
+#            oldFile = aDir + "\\" + typeTagUrl + "\\" + '0.blv'
             pass
 
         if os.path.isfile(oldFile) and not os.path.exists(newFile):
@@ -141,7 +151,7 @@ if __name__ == '__main__':
     subDirs = getSubDir()
     targetDir = createTargetDir(fatherDir)
     if checkSubDirs(subDirs):
-        subDirs.sort(key = lambda s : int(s))
+        subDirs.sort(key=lambda s: int(s))
         subDirs = [fatherDir + '\\' + s for s in subDirs]
         print("正在转换哦，请坐和放宽0^_^0………………")
         for ele in subDirs:
