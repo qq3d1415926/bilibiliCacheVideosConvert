@@ -2,8 +2,7 @@
 ##### one simple playing for converting the blv videos download from bilibili app to flv and rename with the true infomation
 
 ## 已经打包成了EXE文件，可以直接在Windows下双击运行，请大家测试。
-[Click Download](https://github.com/qq3d1415926/bilibiliCacheVideosConvert/releases/download/a0.0.1/videosConverter-v0.0.1.exe)
-[点击下载](https://github.com/qq3d1415926/bilibiliCacheVideosConvert/releases/download/a0.0.1/videosConverter-v0.0.1.exe)
+[点击下载  Click Download](https://github.com/qq3d1415926/bilibiliCacheVideosConvert/releases/download/a0.0.2/videosConverter-v0.0.2.exe)
 
 1. 这是一个转换B站视频的小工具；
 2. 首先，你的电脑得装有`python3`的运行环境；
