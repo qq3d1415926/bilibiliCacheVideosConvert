@@ -5,7 +5,8 @@
 [点击下载  Click Download](https://github.com/qq3d1415926/bilibiliCacheVideosConvert/releases/download/a0.0.2/videosConverter-v0.0.2.exe)
 ### 因为GitHub国内下载速度可能会很慢，所以把项目同步到了Gitee，下载慢的同学可以去Gitee下载.
 [去Gitee下载](https://gitee.com/couldnttouchu/bilibiliCacheVideosConvert/releases)
-<hr>
+<hr/>
+
 1. 这是一个转换B站视频的小工具；
 2. 首先，你的电脑得装有`python3`的运行环境；
 3. 其次，你得用安卓模拟器或者手机B站APP把系列视频缓存下来，然后放进电脑磁盘里；
