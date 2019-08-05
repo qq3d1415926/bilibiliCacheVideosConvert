@@ -4,7 +4,7 @@
 ## 已经打包成了EXE文件，可以直接在Windows下双击运行，请大家测试。
 [点击下载  Click Download](https://github.com/qq3d1415926/bilibiliCacheVideosConvert/releases/download/a0.0.2/videosConverter-v0.0.2.exe)
 <hr>
-### 因为GitHub国内下载速度可能会很慢，所以把项目同步到了Gitee，下载慢的同学可以去Gitee下载
+### 因为GitHub国内下载速度可能会很慢，所以把项目同步到了Gitee，下载慢的同学可以去Gitee下载.
 [去Gitee下载](https://gitee.com/couldnttouchu/bilibiliCacheVideosConvert/releases)
 <hr>
 1. 这是一个转换B站视频的小工具；
